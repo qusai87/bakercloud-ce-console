@@ -49,8 +49,8 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost'; 				// for pdo: mysql:host=localhost
-$db['default']['username'] = 'bakerc_ce';			    // DB Username
-$db['default']['password'] = 'baker';					// DB Username Password
+$db['default']['username'] = 'root';			    // DB Username
+$db['default']['password'] = 'jordan1187;';					// DB Username Password
 $db['default']['database'] = 'bakerc_cloudce';			// DB Name
 $db['default']['dbdriver'] = 'mysqli';
 $db['default']['dbprefix'] = '';
