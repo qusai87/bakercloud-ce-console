@@ -2,7 +2,7 @@
 
 $lang['__yes__'] = "Yes";
 $lang['__no__'] = "No";
-$lang['__LBL_PROJECT_NAME__'] = 'Baker Cloud Console (CE)';
+$lang['__LBL_PROJECT_NAME__'] = 'Modern Language Center (MLC)';
 $lang['__BTN_CANCEL__'] = "Cancel";
 $lang['__BTN_SAVE__'] = "Save";
 $lang['__BTN_BROWSE__'] = "Browse";
@@ -16,11 +16,13 @@ $lang['__BTN_ADD__'] = "Add";
 $lang['__BTN_SEARCH__'] = "Search";
 $lang['__BTN_EXPORT_CSV__'] = "Export CSV";
 
-$lang['__LBL_PROJECT_NAME__'] = "Baker Cloud Console (CE)";
+$lang['__LBL_PROJECT_NAME__'] = "Modern Language Center (MLC)";
 $lang['__LBL_MAIN__'] = "Dashboard";
+$lang['__LBL_SHELF_TITLE__'] = "Shelf Manager";
 $lang['__LBL_TOOLS__'] = "Tools";
 $lang['__LBL_PUBLICATION__'] = "Publication";
 $lang['__LBL_ISSUES__'] = "Issues";
+$lang['__LBL_SHELF__'] = "Shelf";
 $lang['__LBL_PURCHASES__'] = "Purchases";
 $lang['__LBL_RECEIPTS__'] = "Receipts";
 $lang['__LBL_SUBSCRIPTIONS__'] = "Subscriptions";
@@ -111,5 +113,5 @@ $lang['__LBL_LIST__'] = " &nbsp; List &nbsp; ";
 
 
 
-$lang['__LBL_COPYRIGHT__'] = "&copy; 2014 <a href='http://www.bakerframework.com' target='_blank'>Baker Cloud Console (CE) v1.1</a> by <a href='http://www.nin9creative.com' target='_blank'>NIN9 Creative</a>";
+$lang['__LBL_COPYRIGHT__'] = "&copy; 2015 <a href='http://www.mlc.edu.jo/' target='_blank'>Modern Language Center (MLC)</a>";
 

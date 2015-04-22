@@ -41,6 +41,9 @@
                             <li  >
                                 <a  href="<?php echo base_url(); ?>index.php/admin/scrud/browse?table=ISSUES" ><?php echo $this->lang->line('__LBL_ISSUES__'); ?></a>
                             </li>
+                            <li  >
+                                <a  href="<?php echo base_url(); ?>index.php/admin/dropzone" ><?php echo $this->lang->line('__LBL_SHELF__'); ?></a>
+                            </li>
                         </ul>
                     </li>
 						  <!-- MAGROCKET - HARDCODING THE LIST OF AVAILABLE OPTIONS FOR THE USER MENU -->

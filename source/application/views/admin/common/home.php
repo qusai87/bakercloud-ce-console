@@ -4,16 +4,21 @@ $crudAuth = $this->session->userdata('CRUD_AUTH');
 <div id="header"><div class="container"><h1><?php echo $this->lang->line('__LBL_DASHBOARD__'); ?></h1></div></div>
 <div class="container">
 	     <div class="alert alert-success">
-    	  <strong>Welcome to Baker Cloud Console (CE)!</strong>
+    	  <strong>Welcome to Modern Language Center (MLC) administration Console!</strong>
     	  </div>
+    	  
+    	  <h3>Get Started!</h3>    	  
     	  <p>
-    	  		Baker Cloud Console (CE) is a complete backend solution and REST API for supporting Newsstand applications built with the <a href="http://www.bakerframework.com" target="_blank">Baker Framework</a>.
-		  </p>
-		  <p>
-				For information and helpful tutorials on using Baker Cloud Console (CE), please visit <a href="http://www.bakerframework.com" target="_blank">BakerFramework.com</a> or view the bundled help documentation that accompanied this source distribution.    	  
+    	  		To get started using Modern Language Center (MLC), you should create a Publication that corresponds to your iOS Baker Newsstand application.  After you create the Publication, you can add Issues.
+				 <ul>
+			    <li><a href="<?php echo base_url(); ?>index.php/admin/scrud/browse?table=PUBLICATION">Create/Edit Publications</a></li>
+			    <li><a href="<?php echo base_url(); ?>index.php/admin/scrud/browse?table=ISSUES">Create/Edit Issues</a></li>		    			    			    			    			    			    			    
+			    <li><a href="<?php echo base_url(); ?>index.php/admin/scrud/browse?table=ISSUES">Open Shelf Manager</a></li>		    			    			    			    			    			    			    
+			    </ul>   
     	  </p>
+    	  
     	  <p>
-				The administration console allows you to manage / view the following backend data related to your Baker Cloud Console (CE) installation.
+				The administration console allows you to manage / view the following backend data related to your Modern Language Center (MLC) installation.
 			    <table class="table table-bordered">
 			    <thead>
 			    <tr>
@@ -24,11 +29,15 @@ $crudAuth = $this->session->userdata('CRUD_AUTH');
 			    <tbody>
 			    <tr>
 			    <td>Publication</td>
-			    <td>Defines the list of publications that you are supporting with your Baker Cloud Console (CE) backend installation.  Each publication would correspond to a deployed iOS Baker Newsstand application.</td>
+			    <td>Defines the list of publications that you are supporting with your Modern Language Center (MLC) backend installation.  Each publication would correspond to a deployed iOS Baker Newsstand application.</td>
 			    </tr>
   			    <tr>
 			    <td>Issues</td>
-			    <td>Defines the available issues for each of your Publications being managed by Baker Cloud Console (CE).  These issues are what show up in your iOS Baker Newsstand application.</td>
+			    <td>Defines the available issues for each of your Publications being managed by Modern Language Center (MLC).  These issues are what show up in your iOS Baker Newsstand application.</td>
+			    </tr>
+			    <tr>
+			    <td>Shelf</td>
+			    <td>Manage issue packages</td>
 			    </tr>
 			    <tr>
 			    <td>Purchases</td>
@@ -53,21 +62,14 @@ $crudAuth = $this->session->userdata('CRUD_AUTH');
 			    </tbody>
 			    </table> 	  
     	  </p>
-		  <h3>Get Started!</h3>    	  
+		  
     	  <p>
-    	  		To get started using Baker Cloud Console (CE), you should create a Publication that corresponds to your iOS Baker Newsstand application.  After you create the Publication, you can add Issues.
-				 <ul>
-			    <li><a href="<?php echo base_url(); ?>index.php/admin/scrud/browse?table=PUBLICATION">Create/Edit Publications</a></li>
-			    <li><a href="<?php echo base_url(); ?>index.php/admin/scrud/browse?table=ISSUES">Create/Edit Issues</a></li>		    			    			    			    			    			    			    
-			    </ul>   
-    	  </p>
-    	  <p>
-    	  		To manage your Publications and Issues, use the <strong>Publication Management</strong> dropdown menu.  To view/manage the backend Baker Cloud Console (CE) data, use the <strong>Data Browser</strong> dropdown menu, both located at the top of this page.
+    	  		To manage your Publications and Issues, use the <strong>Publication Management</strong> dropdown menu.  To view/manage the backend Modern Language Center (MLC) data, use the <strong>Data Browser</strong> dropdown menu, both located at the top of this page.
     	  </p>
         <hr />
         <footer>
             <p><?php echo $this->lang->line('__LBL_COPYRIGHT__'); ?></p>
-            <img class="pull-right" src="<?php echo base_url(); ?>media/images/BakerCloudCELogo.png">
+            <img class="pull-right" src="<?php echo base_url(); ?>media/images/MLCLogo.png">
         </footer>
     </div>
 </div>

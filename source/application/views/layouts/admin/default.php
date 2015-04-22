@@ -7,13 +7,18 @@
         <meta name="description" content="">
         <meta name="author" content="uszboq0" >
 
-        <link href="<?php echo base_url(); ?>media/bakercloud-theme/css/bootstrap.css" rel="stylesheet">
-		<link href="<?php echo base_url(); ?>media/bakercloud-theme/css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="<?php echo base_url(); ?>media/bakercloud-theme/css/bootstrap.min.css" rel="stylesheet">
+        <link href="<?php echo base_url(); ?>media/bakercloud-theme/css/bootstrap-responsive.min.css" rel="stylesheet">
 		<link href="<?php echo base_url(); ?>media/bakercloud-theme/css/glyphicons.css" rel="stylesheet">
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
 	    <link href="<?php echo base_url(); ?>media/bakercloud-theme/css/base.css" rel="stylesheet">
 		<link href="<?php echo base_url(); ?>media/bakercloud-theme/css/blue.css" rel="stylesheet">
         
+        <?php if (isset($dropzone)) { ?>
+            <link href="<?php echo base_url(); ?>media/dropzone/min/dropzone.min.css" type="text/css" rel="stylesheet" />
+            <script src="<?php echo base_url(); ?>media/dropzone/min/dropzone.min.js"></script>
+        <?php } ?>
+
         <!-- Le styles 
         <link href="<?php echo base_url(); ?>media/css/template.css" rel="stylesheet">
         <link href="<?php echo base_url(); ?>media/css/style.css" rel="stylesheet"> -->
