@@ -2,39 +2,27 @@
 
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
- 
-class Dropzone extends Admin_Controller {
-  
-	public function __construct() {
-	   parent::__construct();
-	   $this->load->helper(array('url','html','form')); 
-	}
- 
-	public function index() {
-		$this->load->model('crud_auth');
+
+class FileBrowser extends Admin_Controller {
+
+    public function file_browser() {
+        $this->load->model('crud_auth');
         $this->load->model('admin/home_menu');
 
-        $var = array();
-        
-        $var['main_menu'] = $this->home_menu->fetch();
-        $var['main_content'] = $this->load->view('dropzone_view',$var,true);
-        $var['dropzone'] = true;
-        $this->load->view('layouts/admin/default', $var);
-	}
-	
-	public function uploads() {
+	    $var = array();
+
 	    $segment_array = $this->uri->segment_array();
-	 	
+	 
 	    // first and second segments are the controller and method
 	    $controller = array_shift( $segment_array );
 	    $method = array_shift( $segment_array );
+	 
 	    // absolute path using additional segments
 	    $path_in_url = '';
 	    foreach ( $segment_array as $segment ) $path_in_url.= $segment.'/';
 	    $absolute_path = getcwd().'/'.$path_in_url;
 	    $absolute_path = rtrim( $absolute_path ,'/' );
-	 	
-		//var_dump( $absolute_path);
+	 
 	    // check if it is a path or file
 	    if ( is_dir( $absolute_path ))
 	    {
@@ -67,13 +55,7 @@ class Dropzone extends Admin_Controller {
 	        // ensure it exists and is the first in array
 	        if ( $path_in_url != '' )
 	            array_unshift ( $dirs, array( 'name' => '..' ));
-	 	
-
-	 		$this->load->model('crud_auth');
-	        $this->load->model('admin/home_menu');
-
-		    $var = array();
-
+	 
 	        // view data
 	        $data = array(
 	            'controller' => $controller,
@@ -119,26 +101,5 @@ class Dropzone extends Admin_Controller {
 	            show_404();
 	        }
 	    }
-	}
-
-	public function upload() {
-		if (!empty($_FILES)) {
-			$tempFile = $_FILES['file']['tmp_name'];
-			$fileName = $_FILES['file']['name'];
-			$targetPath = getcwd() . '/uploads/';
-			$targetFile = $targetPath . $fileName ;
-			move_uploaded_file($tempFile, $targetFile);
-			// if you want to save in db,where here
-			// with out model just for example
-			// $this->load->database(); // load database
-			// $this->db->insert('file_table',array('file_name' => $fileName));
-		} else {
-			echo 'error!';
-		}
     }
 }
- 
-/* End of file dropzone.js */
-/* Location: ./application/controllers/dropzone.php */
- 
- 

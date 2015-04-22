@@ -5,6 +5,13 @@ $crudAuth = $this->session->userdata('CRUD_AUTH');
 	<div class="container"><h1><?php echo $this->lang->line('__LBL_SHELF_TITLE__'); ?></h1></div></div>
 	<div class="container">
 	    <h1>Upload Issue Files</h1>
+
+	     <p>
+    	  	<ul>
+			    <li><a href="<?php echo base_url(); ?>index.php/admin/dropzone/uploads">Show Uploaded files</a></li>
+			 </ul>   
+    	  </p>
+
 	    <div class="row">
 	      <div class="col-lg-5">
 	        <!-- The global file processing state -->

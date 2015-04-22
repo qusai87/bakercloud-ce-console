@@ -19,6 +19,7 @@ $lang['__BTN_EXPORT_CSV__'] = "Export CSV";
 $lang['__LBL_PROJECT_NAME__'] = "Modern Language Center (MLC)";
 $lang['__LBL_MAIN__'] = "Dashboard";
 $lang['__LBL_SHELF_TITLE__'] = "Shelf Manager";
+$lang['__LBL_FILE_BROWSER__'] = "File Browser";
 $lang['__LBL_TOOLS__'] = "Tools";
 $lang['__LBL_PUBLICATION__'] = "Publication";
 $lang['__LBL_ISSUES__'] = "Issues";
