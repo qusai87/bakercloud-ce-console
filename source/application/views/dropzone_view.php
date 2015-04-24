@@ -79,6 +79,7 @@ $crudAuth = $this->session->userdata('CRUD_AUTH');
 	      previewNode.parentNode.removeChild(previewNode);
 
 	      var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
+	        acceptedFiles: "application/zip",
 	        url: "http://localhost/bakercloud-ce-console/source/index.php/admin/dropzone/upload", // Set the url
 	        thumbnailWidth: 80,
 	        thumbnailHeight: 80,
