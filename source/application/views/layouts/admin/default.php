@@ -25,6 +25,32 @@
         
         <script src="<?php echo base_url(); ?>media/bootstrap/js/jquery-1.7.1.min.js"></script>
         <script src="<?php echo base_url(); ?>media/bootstrap/js/bootstrap.min.js"></script>
+
+        <?php if (isset($sortable)) { ?>
+            <link href="<?php echo base_url(); ?>media/dropzone/min/dropzone.min.css" type="text/css" rel="stylesheet" />
+            <script src="<?php echo base_url(); ?>media/jquery-sortable/jquery-sortable.js"></script>
+            <style type="text/css">
+                body.dragging, body.dragging * {
+                  cursor: move !important;
+                }
+
+                .dragged {
+                  position: absolute;
+                  opacity: 0.5;
+                  z-index: 2000;
+                }
+
+                .example li.placeholder {
+                  position: relative;
+                  /** More li styles **/
+                }
+                .example li.placeholder:before {
+                  position: absolute;
+                  /** Define arrowhead **/
+                }
+            </style>
+        <?php } ?>
+
     </head>
     <style>
    	 #header{

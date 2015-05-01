@@ -2,3 +2,4 @@
 source/application/config/database/bakerc_cloudce/
 source/application/logs/log-*.php
 source/uploads
+source/issues

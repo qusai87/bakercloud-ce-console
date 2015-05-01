@@ -42,7 +42,7 @@
                                 <a  href="<?php echo base_url(); ?>index.php/admin/scrud/browse?table=ISSUES" ><?php echo $this->lang->line('__LBL_ISSUES__'); ?></a>
                             </li>
                             <li  >
-                                <a  href="<?php echo base_url(); ?>index.php/admin/dropzone" ><?php echo $this->lang->line('__LBL_SHELF__'); ?></a>
+                                <a  href="<?php echo base_url(); ?>index.php/admin/shelf" ><?php echo $this->lang->line('__LBL_SHELF__'); ?></a>
                             </li>
                         </ul>
                     </li>

@@ -13,7 +13,7 @@ $crudAuth = $this->session->userdata('CRUD_AUTH');
 				 <ul>
 			    <li><a href="<?php echo base_url(); ?>index.php/admin/scrud/browse?table=PUBLICATION">Create/Edit Publications</a></li>
 			    <li><a href="<?php echo base_url(); ?>index.php/admin/scrud/browse?table=ISSUES">Create/Edit Issues</a></li>		    			    			    			    			    			    			    
-			    <li><a href="<?php echo base_url(); ?>index.php/admin/scrud/browse?table=ISSUES">Open Shelf Manager</a></li>		    			    			    			    			    			    			    
+			    <li><a href="<?php echo base_url(); ?>index.php/admin/shelf">Open Shelf Manager</a></li>		    			    			    			    			    			    			    
 			    </ul>   
     	  </p>
     	  
@@ -69,7 +69,7 @@ $crudAuth = $this->session->userdata('CRUD_AUTH');
         <hr />
         <footer>
             <p><?php echo $this->lang->line('__LBL_COPYRIGHT__'); ?></p>
-            <img class="pull-right" src="<?php echo base_url(); ?>media/images/MLCLogo.png">
+            <img class="pull-right" src="<?php echo base_url(); ?>media/images/logo.png">
         </footer>
     </div>
 </div>
