@@ -58,13 +58,10 @@ class Shelf extends Admin_Controller {
 				$book->contents  = $contents;
 			}
         	
-        	
         	if (isset($book)) {
-        		write_file($target_path.'/book_test.json',json_encode($book, JSON_PRETTY_PRINT));
+        		write_file($target_path.'/book.json',json_encode($book, JSON_PRETTY_PRINT));
         		die(json_encode($book));
         		redirect('admin/shelf/package/'.$this->input->get('file'), 'refresh');
-        	} else {
-        		
         	}
 
 			exit(var_dump($contents));

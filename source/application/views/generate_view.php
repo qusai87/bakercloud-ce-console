@@ -23,7 +23,8 @@ $crudAuth = $this->session->userdata('CRUD_AUTH');
 	    	$prefix = $controller.'/'.$method.'/'.$path_in_url;
 	    	echo '<ol class="row span10 contents">';
 	    	foreach( $files as $file ) {
-	    		echo '<li class="well span10 ">' . anchor($prefix.$file, $file).'</li>';
+	    		if ($file != 'index.html')
+	    			echo '<li class="well span10 ">' . anchor($prefix.$file, $file).'</li>';
 	    	} 
 	    	echo '</ol>';
 	   	} ?>
