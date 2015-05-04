@@ -27,6 +27,10 @@ class Scrud extends Admin_Controller {
         }
         $content = str_replace("<?php exit; ?>\n", "", file_get_contents(__DATABASE_CONFIG_PATH__ . '/' . $this->db->database . '/' . $this->input->get('table') . '.php'));
         $conf = unserialize($content);
+        //$conf['form_elements']['ISSUES.URL']['element'] = array('select', array('option_table' => 'SHELF' , 'option_key' => 'URL', 'option_value' => 'FILE'));
+        //die(var_dump($conf['form_elements']));
+        //$conf = serialize($conf);
+        //die($conf);
 
         $hook = Hook::singleton();
         $hook->add_function('SCRUD_INIT', 'f_scrud_init');

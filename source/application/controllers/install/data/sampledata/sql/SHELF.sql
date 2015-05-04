@@ -23,24 +23,22 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `SUBSCRIPTIONS`
+-- Table structure for table `SHELF`
 --
 
-CREATE TABLE IF NOT EXISTS `SUBSCRIPTIONS` (
-  `APP_ID` varchar(255) NOT NULL,
-  `USER_ID` varchar(255) NOT NULL,
-  `EFFECTIVE_DATE` datetime NOT NULL,
-  `EXPIRATION_DATE` datetime NOT NULL,
-  `LAST_VALIDATED` datetime NOT NULL,
-  PRIMARY KEY (`APP_ID`(75),`USER_ID`(50))
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `SHELF` (
+  `ID` int(10) NOT NULL AUTO_INCREMENT,
+  `FILE` varchar(255) DEFAULT NULL,
+  `URL` varchar(255) DEFAULT NULL,
+  UNIQUE KEY `ID` (`ID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
 
 --
--- Dumping data for table `SUBSCRIPTIONS`
+-- Dumping data for table `SHELF`
 --
 
--- INSERT INTO `SUBSCRIPTIONS` (`APP_ID`, `USER_ID`, `EFFECTIVE_DATE`, `EXPIRATION_DATE`, `LAST_VALIDATED`) VALUES
--- ('com.nin9creative.baker', 'D5DBF605-995F-4D66-8393-45D1017D12B9', '2013-04-25 19:16:53', '2013-04-25 19:46:53', '2013-04-25 19:16:58');
+INSERT INTO `SHELF` (`ID`, `FILE`, `URL`) VALUES
+(1, 'sample.hpub', "http://interactiveapps.mobi/index.php/admin/shelf/uploads/generated/sample.hpub");
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

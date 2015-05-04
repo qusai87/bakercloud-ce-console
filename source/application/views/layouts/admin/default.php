@@ -10,7 +10,7 @@
         <link href="<?php echo base_url(); ?>media/bakercloud-theme/css/bootstrap.min.css" rel="stylesheet">
         <link href="<?php echo base_url(); ?>media/bakercloud-theme/css/bootstrap-responsive.min.css" rel="stylesheet">
 		<link href="<?php echo base_url(); ?>media/bakercloud-theme/css/glyphicons.css" rel="stylesheet">
-		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+		<!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'> -->
 	    <link href="<?php echo base_url(); ?>media/bakercloud-theme/css/base.css" rel="stylesheet">
 		<link href="<?php echo base_url(); ?>media/bakercloud-theme/css/blue.css" rel="stylesheet">
         

@@ -59,131 +59,144 @@ class Index extends CI_Controller {
             $connection = @mysql_connect($this->db->hostname, $this->db->username, $this->db->password);
 				
 			if ((int) $this->input->post('sample_data') == 1) {
-            // install new 
-            ob_start();
-            $filename = dirname(__FILE__) . '/data/user/sql/crud_permissions.sql';
-            $compress = false;
-            $dump = new phpMyImporter($this->db->database, $connection, $filename, $compress);
-            $dump->utf8 = true;
-            $dump->doImport();
-            ob_get_clean();
+                // install new 
+                ob_start();
+                $filename = dirname(__FILE__) . '/data/user/sql/crud_permissions.sql';
+                $compress = false;
+                $dump = new phpMyImporter($this->db->database, $connection, $filename, $compress);
+                $dump->utf8 = true;
+                $dump->doImport();
+                ob_get_clean();
 
-            ob_start();
-            $filename = dirname(__FILE__) . '/data/user/sql/crud_users.sql';
-            $compress = false;
-            $dump = new phpMyImporter($this->db->database, $connection, $filename, $compress);
-            $dump->utf8 = true;
-            $dump->doImport();
-            ob_get_clean();
-                       
-            ob_start();
-            $filename = dirname(__FILE__) . '/data/user/sql/crud_user_permissions.sql';
-            $compress = false;
-            $dump = new phpMyImporter($this->db->database, $connection, $filename, $compress);
-            $dump->utf8 = true;
-            $dump->doImport();
-            ob_get_clean();
+                ob_start();
+                $filename = dirname(__FILE__) . '/data/user/sql/crud_users.sql';
+                $compress = false;
+                $dump = new phpMyImporter($this->db->database, $connection, $filename, $compress);
+                $dump->utf8 = true;
+                $dump->doImport();
+                ob_get_clean();
+                           
+                ob_start();
+                $filename = dirname(__FILE__) . '/data/user/sql/crud_user_permissions.sql';
+                $compress = false;
+                $dump = new phpMyImporter($this->db->database, $connection, $filename, $compress);
+                $dump->utf8 = true;
+                $dump->doImport();
+                ob_get_clean();
 
-            // install group
-            ob_start();
-            $filename = dirname(__FILE__) . '/data/user/sql/crud_groups.sql';
-            $compress = false;
-            $dump = new phpMyImporter($this->db->database, $connection, $filename, $compress);
-            $dump->utf8 = true;
-            $dump->doImport();
-            ob_get_clean();
-            
-            ob_start();
-            $filename = dirname(__FILE__) . '/data/user/sql/crud_histories.sql';
-            $compress = false;
-            $dump = new phpMyImporter($this->db->database, $connection, $filename, $compress);
-            $dump->utf8 = true;
-            $dump->doImport();
-            ob_get_clean();            
-            
-            $oldumask = umask(0);
-            recurse_copy(dirname(__FILE__) . '/data/user/config', __DATABASE_CONFIG_PATH__ . '/' . $this->db->database);
-            umask($oldumask);
+                // install group
+                ob_start();
+                $filename = dirname(__FILE__) . '/data/user/sql/crud_groups.sql';
+                $compress = false;
+                $dump = new phpMyImporter($this->db->database, $connection, $filename, $compress);
+                $dump->utf8 = true;
+                $dump->doImport();
+                ob_get_clean();
+                
+                ob_start();
+                $filename = dirname(__FILE__) . '/data/user/sql/crud_histories.sql';
+                $compress = false;
+                $dump = new phpMyImporter($this->db->database, $connection, $filename, $compress);
+                $dump->utf8 = true;
+                $dump->doImport();
+                ob_get_clean();            
+                
+                $oldumask = umask(0);
+                recurse_copy(dirname(__FILE__) . '/data/user/config', __DATABASE_CONFIG_PATH__ . '/' . $this->db->database);
+                umask($oldumask);
 
-            // install sample data
-            ob_start();
-            $filename = dirname(__FILE__) . '/data/sampledata/sql/ISSUES.sql';
-            $compress = false;
-            $dump = new phpMyImporter($this->db->database, $connection, $filename, $compress);
-            $dump->utf8 = true;
-            $dump->doImport();
-            ob_get_clean();
-             
-            ob_start();
-            $filename = dirname(__FILE__) . '/data/sampledata/sql/RECEIPTS.sql';
-            $compress = false;
-            $dump = new phpMyImporter($this->db->database, $connection, $filename, $compress);
-            $dump->utf8 = true;
-            $dump->doImport();
-            ob_get_clean();
+                // install sample data
+                ob_start();
+                $filename = dirname(__FILE__) . '/data/sampledata/sql/ISSUES.sql';
+                $compress = false;
+                $dump = new phpMyImporter($this->db->database, $connection, $filename, $compress);
+                $dump->utf8 = true;
+                $dump->doImport();
+                ob_get_clean();
+                 
+                ob_start();
+                $filename = dirname(__FILE__) . '/data/sampledata/sql/RECEIPTS.sql';
+                $compress = false;
+                $dump = new phpMyImporter($this->db->database, $connection, $filename, $compress);
+                $dump->utf8 = true;
+                $dump->doImport();
+                ob_get_clean();
 
-            ob_start();
-            $filename = dirname(__FILE__) . '/data/sampledata/sql/PURCHASES.sql';
-            $compress = false;
-            $dump = new phpMyImporter($this->db->database, $connection, $filename, $compress);
-            $dump->utf8 = true;
-            $dump->doImport();
-            ob_get_clean();
-             
-            ob_start();
-            $filename = dirname(__FILE__) . '/data/sampledata/sql/PUBLICATION.sql';
-            $compress = false;
-            $dump = new phpMyImporter($this->db->database, $connection, $filename, $compress);
-            $dump->utf8 = true;
-            $dump->doImport();
-            ob_get_clean();
-             
-            ob_start();
-            $filename = dirname(__FILE__) . '/data/sampledata/sql/SUBSCRIPTIONS.sql';
-            $compress = false;
-            $dump = new phpMyImporter($this->db->database, $connection, $filename, $compress);
-            $dump->utf8 = true;
-            $dump->doImport();
-            ob_get_clean();      
-             
-            ob_start();
-            $filename = dirname(__FILE__) . '/data/sampledata/sql/SYSTEM_LOG.sql';
-            $compress = false;
-            $dump = new phpMyImporter($this->db->database, $connection, $filename, $compress);
-            $dump->utf8 = true;
-            $dump->doImport();
-            ob_get_clean();        
+                ob_start();
+                $filename = dirname(__FILE__) . '/data/sampledata/sql/PURCHASES.sql';
+                $compress = false;
+                $dump = new phpMyImporter($this->db->database, $connection, $filename, $compress);
+                $dump->utf8 = true;
+                $dump->doImport();
+                ob_get_clean();
+                 
+                ob_start();
+                $filename = dirname(__FILE__) . '/data/sampledata/sql/PUBLICATION.sql';
+                $compress = false;
+                $dump = new phpMyImporter($this->db->database, $connection, $filename, $compress);
+                $dump->utf8 = true;
+                $dump->doImport();
+                ob_get_clean();
 
-            ob_start();
-            $filename = dirname(__FILE__) . '/data/sampledata/sql/APNS_TOKENS.sql';
-            $compress = false;
-            $dump = new phpMyImporter($this->db->database, $connection, $filename, $compress);
-            $dump->utf8 = true;
-            $dump->doImport();
-            ob_get_clean();                             
-             
-            ob_start();
-            $filename = dirname(__FILE__) . '/data/sampledata/sql/ANALYTICS.sql';
-            $compress = false;
-            $dump = new phpMyImporter($this->db->database, $connection, $filename, $compress);
-            $dump->utf8 = true;
-            $dump->doImport();
-            ob_get_clean(); 
-                         
-            $oldumask = umask(0);
-            recurse_copy(dirname(__FILE__) . '/data/sampledata/config', __DATABASE_CONFIG_PATH__ . '/' . $this->db->database);
-            umask($oldumask);
 
-            $oldumask = umask(0);
-            file_put_contents(__DATABASE_CONFIG_PATH__ . '/' . $this->db->database . '/v_1.1.txt', "");
-            umask($oldumask);
+                ob_start();
+                $filename = dirname(__FILE__) . '/data/sampledata/sql/SHELF.sql';
+                $compress = false;
+                $dump = new phpMyImporter($this->db->database, $connection, $filename, $compress);
+                $dump->utf8 = true;
+                $dump->doImport();
+                ob_get_clean();
+                 
+                ob_start();
+                $filename = dirname(__FILE__) . '/data/sampledata/sql/SUBSCRIPTIONS.sql';
+                $compress = false;
+                $dump = new phpMyImporter($this->db->database, $connection, $filename, $compress);
+                $dump->utf8 = true;
+                $dump->doImport();
+                ob_get_clean();      
+                 
+                ob_start();
+                $filename = dirname(__FILE__) . '/data/sampledata/sql/SYSTEM_LOG.sql';
+                $compress = false;
+                $dump = new phpMyImporter($this->db->database, $connection, $filename, $compress);
+                $dump->utf8 = true;
+                $dump->doImport();
+                ob_get_clean();        
 
-            $var = array();
-            $var['main_content'] = $this->load->view('install/complete', $var, true);
-            $this->load->view('layouts/install', $var);
-         }
+                ob_start();
+                $filename = dirname(__FILE__) . '/data/sampledata/sql/APNS_TOKENS.sql';
+                $compress = false;
+                $dump = new phpMyImporter($this->db->database, $connection, $filename, $compress);
+                $dump->utf8 = true;
+                $dump->doImport();
+                ob_get_clean();                             
+                 
+                ob_start();
+                $filename = dirname(__FILE__) . '/data/sampledata/sql/ANALYTICS.sql';
+                $compress = false;
+                $dump = new phpMyImporter($this->db->database, $connection, $filename, $compress);
+                $dump->utf8 = true;
+                $dump->doImport();
+                ob_get_clean(); 
+                             
+                $oldumask = umask(0);
+                recurse_copy(dirname(__FILE__) . '/data/sampledata/config', __DATABASE_CONFIG_PATH__ . '/' . $this->db->database);
+                umask($oldumask);
+
+                $oldumask = umask(0);
+                file_put_contents(__DATABASE_CONFIG_PATH__ . '/' . $this->db->database . '/v_1.1.txt', "");
+                umask($oldumask);
+
+                $oldumask = umask(0);
+                recurse_copy(dirname(__FILE__) . '/data/uploads/', __DATABASE_CONFIG_PATH__ . '/' . $this->db->database . '/uploads');
+                umask($oldumask);
+
+                $var = array();
+                $var['main_content'] = $this->load->view('install/complete', $var, true);
+                $this->load->view('layouts/install', $var);
+             }
      		else {
-     			  $errors[] = 'Please select the checkbox to confirm your installation.';
+     			$errors[] = 'Please select the checkbox to confirm your installation.';
       
 		        $this->savant->errors = $errors;
 		        if (count($errors) > 0) {
@@ -191,9 +204,9 @@ class Index extends CI_Controller {
 		            $var['errors'] = $errors;
 		            $var['main_content'] = $this->load->view('install/install', $var, true);
 		            $this->load->view('layouts/install', $var);
-     			  }
+     			}
+            }
         }
-    }
 	}
 }
 

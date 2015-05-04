@@ -1,5 +1,5 @@
 .DS_Store
-source/application/config/database/bakerc_cloudce/
+source/application/config/database/
 source/application/logs/log-*.php
 source/uploads
 source/issues

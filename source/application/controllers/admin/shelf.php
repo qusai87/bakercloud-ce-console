@@ -3,11 +3,18 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
  
+
 class Shelf extends Admin_Controller {
-  
+  	protected $uploadsDirectory = '';
 	public function __construct() {
 	   parent::__construct();
 	   $this->load->helper(array('url','html','form','file')); 
+
+	   if (!file_exists(__DATABASE_CONFIG_PATH__ . '/' . $this->db->database )) {
+            exit;
+        } else {
+        	$this->uploadsDirectory = __DATABASE_CONFIG_PATH__ . '/' . $this->db->database;
+        }
 	}
  
 	public function index() {
@@ -27,7 +34,7 @@ class Shelf extends Admin_Controller {
 		$input_data = rtrim(file_get_contents('php://input'),',');
 		if (isset($input_data) && !empty($input_data)) {
 			$contents = explode(',', $input_data); 
-			$target_path = getcwd().'/uploads/packages/'.$this->input->get('file');
+			$target_path = $this->uploadsDirectory . '/uploads/packages/'.$this->input->get('file');
 
 			$json = read_file($target_path.'/book.json');
 
@@ -81,7 +88,7 @@ class Shelf extends Admin_Controller {
 	    		$path_in_url.= $segment.'/';
 	    	}
 	    }
-	    $absolute_path = getcwd().'/'.$path_in_url;
+	    $absolute_path = $this->uploadsDirectory . '/'.$path_in_url;
 	    $absolute_path = rtrim( $absolute_path ,'/' );
 
 	    $dirs = [];
@@ -102,7 +109,7 @@ class Shelf extends Admin_Controller {
         $data = array(
             'controller' => $controller,
 	        'method' => $method,
-	        'virtual_root' => getcwd(),
+	        'virtual_root' => $this->uploadsDirectory,
 	        'path_in_url' => $path_in_url,
             'virtual_root' => $absolute_path,
             'files' => $htmlFiles
@@ -134,13 +141,13 @@ class Shelf extends Admin_Controller {
 	    		$generated_in_url.= $segment.'/';
 	    	}
 	    }
-	    $absolute_path = getcwd().'/'.$path_in_url;
-	    $generated_path = getcwd().'/'.$generated_in_url;
+	    $absolute_path = $this->uploadsDirectory . '/'.$path_in_url;
+	    $generated_path = $this->uploadsDirectory . '/'.$generated_in_url;
 	    $absolute_path = rtrim( $absolute_path ,'/' );
 	    $generated_path = rtrim( $generated_path ,'/' );
 
-	    if (!is_dir(getcwd() . '/uploads/generated')) {
-			mkdir(getcwd() . '/uploads/generated');
+	    if (!is_dir($this->uploadsDirectory . '/uploads/generated')) {
+			mkdir($this->uploadsDirectory . '/uploads/generated');
 		}
 
 	    //die($absolute_path);
@@ -148,6 +155,8 @@ class Shelf extends Admin_Controller {
 	    
 	    $this->zip->get_files_from_folder($absolute_path,'/');
 	    $this->zip->archive($generated_path.'.hpub');
+	    $fileName = pathinfo($absolute_path.'.zip',PATHINFO_FILENAME);
+	    $this->db->insert('SHELF',array('FILE' => $fileName , 'URL' =>  base_url() . 'index.php/admin/shelf/uploads/generated/'.$fileName.'.hpub' ));
 
 	    //delete_files($absolute_path,true);
 	    //rmdir($absolute_path);
@@ -175,7 +184,7 @@ class Shelf extends Admin_Controller {
 	    			$file_name .= $segment.'/';
 	    	}
 	    }
-	    $absolute_path = getcwd().'/'.$path_in_url;
+	    $absolute_path = $this->uploadsDirectory . '/'.$path_in_url;
 	    $absolute_path = rtrim( $absolute_path ,'/' );
 	    // check if it is a path or file
 	    //die($absolute_path );
@@ -188,7 +197,7 @@ class Shelf extends Admin_Controller {
 
         	if ($path_parts['extension'] == 'zip'/* || $path_parts['extension'] == 'hpub'*/) {
         		//die(var_dump($path_parts));
-        		$target_path = getcwd().'/uploads/packages/'.$path_parts['filename'];
+        		$target_path = $this->uploadsDirectory . '/uploads/packages/'.$path_parts['filename'];
     			$target_path = rtrim( $target_path ,'/' );
 	        	$zip = new ZipArchive;
 
@@ -267,7 +276,7 @@ class Shelf extends Admin_Controller {
 	        $data = array(
 	            'controller' => $controller,
 	            'method' => $method,
-	            'virtual_root' => getcwd(),
+	            'virtual_root' => $this->uploadsDirectory,
 	            'path_in_url' => $path_in_url,
 	            'dirs' => $dirs,
 	            'files' => $files,
@@ -282,7 +291,7 @@ class Shelf extends Admin_Controller {
 	}
 
 	public function upload() {
-		$targetPath = getcwd() . '/uploads';
+		$targetPath = $this->uploadsDirectory . '/uploads';
 		if (!is_dir($targetPath)) {
 			mkdir($targetPath);
 		}
@@ -301,7 +310,6 @@ class Shelf extends Admin_Controller {
 			// if you want to save in db,where here
 			// with out model just for example
 			// $this->load->database(); // load database
-			// $this->db->insert('file_table',array('file_name' => $fileName));
 		} else {
 			echo 'error!';
 		}

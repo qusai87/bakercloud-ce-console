@@ -48,10 +48,10 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost'; 				// for pdo: mysql:host=localhost
+$db['default']['hostname'] = 'localhost'; 			// for pdo: mysql:host=localhost
 $db['default']['username'] = 'root';			    // DB Username
-$db['default']['password'] = 'jordan1187;';					// DB Username Password
-$db['default']['database'] = 'bakerc_cloudce';			// DB Name
+$db['default']['password'] = 'jordan1187;';			// DB Username Password
+$db['default']['database'] = 'baker_cloud';			// DB Name
 $db['default']['dbdriver'] = 'mysqli';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;

@@ -10,26 +10,7 @@ $crudAuth = $this->session->userdata('CRUD_AUTH');
 	    	<div class="col-lg-5 span-8">
 			  	<a class="btn btn-success" role="button" href="<?php echo base_url(); ?>index.php/admin/shelf/uploads/generated"><b>Show Generated Hpub Files</b></a></li>
     		</div>
-    	</div>	    
-
-
-	    <?php /* ?>
-	    <div id="actions"  class="col-lg-7">
-	        <!-- The fileinput-button span is used to style the file input field as button -->
-	        <span class="btn btn-success fileinput-button">
-	            <i class="glyphicon glyphicon-plus"></i>
-	            <span>Add files...</span>
-	        </span>
-	        <button type="submit" class="btn btn-primary start" disabled="disabled">
-	            <i class="glyphicon glyphicon-upload"></i>
-	            <span>Start upload</span>
-	        </button>
-	        <button type="reset" class="btn btn-warning cancel" disabled="disabled">
-	            <i class="glyphicon glyphicon-ban-circle"></i>
-	            <span>Cancel upload</span>
-	        </button>
-	    </div>
-		<?php */ ?>
+    	</div>
 
 		<div class="container-fluid">
 		  <div class="row">
@@ -97,7 +78,7 @@ $crudAuth = $this->session->userdata('CRUD_AUTH');
 
 	      // Hide the total progress bar when nothing's uploading anymore
 	      myDropzone.on("queuecomplete", function(progress) {
-	      	location.assign(location.href + '/uploads/uploaded');
+	      	location.assign(location.href + '/uploads/uploaded/' + this.files[0].name);
 	        //document.querySelector("#total-progress").style.display = "none";
 	      });
 

@@ -708,7 +708,9 @@ class Crud {
                     break;
             }
         }
+
         if (count($_POST) > 0 && $this->validate()) {
+
             if (is_file($this->conf['theme_path'] . '/confirm.php')) {
                 require_once $this->conf['theme_path'] . '/confirm.php';
             } else {
@@ -758,7 +760,6 @@ class Crud {
         $history['user_name'] = (isset($crudAuth['user_name']))?$crudAuth['user_name']:'';
         $history['history_table_name'] = $this->conf['table'];
         $history['history_date_time'] = date("Y-m-d H:i:s");
-        
         if (count($_POST) > 0 && $this->validate() && $auth_token == $CI->session->userdata('auth_token_xtable')) {
             if ($hook->isExisted('SCRUD_BEFORE_SAVE')) {
                 $this->data = $hook->filter('SCRUD_BEFORE_SAVE', $this->data);
@@ -1065,9 +1066,12 @@ class Crud {
         } else if (!empty($this->data[$ary[0]][$ary[1]])) {
             if (!is_array($v['rule'])) {
                 if (trim($v['rule']) != '') {
-                    if (!$validation->{$v['rule']}($this->data[$ary[0]][$ary[1]])) {
-                        $this->errors[$k][] = $v['message'];
+                    if (filter_var($this->data[$ary[0]][$ary[1]],FILTER_VALIDATE_URL) === FALSE) {
+                        if (!$validation->{$v['rule']}($this->data[$ary[0]][$ary[1]])) {
+                            $this->errors[$k][] = $v['message'];
+                        }
                     }
+                    
                 }
             } else {
                 if (trim($v['rule'][0]) != '') {

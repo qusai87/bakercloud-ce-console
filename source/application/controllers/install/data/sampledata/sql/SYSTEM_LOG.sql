@@ -38,11 +38,11 @@ CREATE TABLE IF NOT EXISTS `SYSTEM_LOG` (
 -- Dumping data for table `SYSTEM_LOG`
 --
 
-INSERT INTO `SYSTEM_LOG` (`ID`, `TYPE`, `MESSAGE`, `TIMESTAMP`) VALUES
-(1319, 'Info', 'Time since last validating receipt for APP ID: com.nin9creative.baker USER ID: D5DBF605-995F-4D66-8393-45D1017D12B9 = 0 hours 21 minutes', '2013-04-26 02:38:37'),
-(1318, 'Info', 'Checking subscription for APP ID: com.nin9creative.baker USER ID: D5DBF605-995F-4D66-8393-45D1017D12B9', '2013-04-26 02:38:37'),
-(1316, 'Info', 'Retrieving Issues for APP ID: com.nin9creative.baker USER ID: D5DBF605-995F-4D66-8393-45D1017D12B9', '2013-04-26 02:38:37'),
-(1317, 'Info', 'Checking purchases for APP ID: com.nin9creative.baker USER ID: D5DBF605-995F-4D66-8393-45D1017D12B9', '2013-04-26 02:38:37');
+-- INSERT INTO `SYSTEM_LOG` (`ID`, `TYPE`, `MESSAGE`, `TIMESTAMP`) VALUES
+-- (1319, 'Info', 'Time since last validating receipt for APP ID: com.nin9creative.baker USER ID: D5DBF605-995F-4D66-8393-45D1017D12B9 = 0 hours 21 minutes', '2013-04-26 02:38:37'),
+-- (1318, 'Info', 'Checking subscription for APP ID: com.nin9creative.baker USER ID: D5DBF605-995F-4D66-8393-45D1017D12B9', '2013-04-26 02:38:37'),
+-- (1316, 'Info', 'Retrieving Issues for APP ID: com.nin9creative.baker USER ID: D5DBF605-995F-4D66-8393-45D1017D12B9', '2013-04-26 02:38:37'),
+-- (1317, 'Info', 'Checking purchases for APP ID: com.nin9creative.baker USER ID: D5DBF605-995F-4D66-8393-45D1017D12B9', '2013-04-26 02:38:37');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

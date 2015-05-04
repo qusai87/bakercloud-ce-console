@@ -41,10 +41,10 @@ CREATE TABLE IF NOT EXISTS `ANALYTICS` (
 -- Dumping data for table `ANALYTICS`
 --
 
-INSERT INTO `ANALYTICS` (`ID`, `APP_ID`, `USER_ID`, `TYPE`, `VALUE`, `METADATA`, `TIMESTAMP`) VALUES
-(4, 'com.nin9creative.baker', 'D5DBF605-995F-4D66-8393-45D1017D12B9', 'api_interaction', 1, NULL, '2013-07-18 20:39:34'),
-(2, 'com.nin9creative.baker', 'D5DBF605-995F-4D66-8393-45D1017D12B9', 'api_interaction', 1, NULL, '2013-07-18 20:29:29'),
-(3, 'com.nin9creative.baker', 'D5DBF605-995F-4D66-8393-45D1017D12B9', 'api_interaction', 1, NULL, '2013-07-18 20:29:31');
+-- INSERT INTO `ANALYTICS` (`ID`, `APP_ID`, `USER_ID`, `TYPE`, `VALUE`, `METADATA`, `TIMESTAMP`) VALUES
+-- (4, 'com.nin9creative.baker', 'D5DBF605-995F-4D66-8393-45D1017D12B9', 'api_interaction', 1, NULL, '2013-07-18 20:39:34'),
+-- (2, 'com.nin9creative.baker', 'D5DBF605-995F-4D66-8393-45D1017D12B9', 'api_interaction', 1, NULL, '2013-07-18 20:29:29'),
+-- (3, 'com.nin9creative.baker', 'D5DBF605-995F-4D66-8393-45D1017D12B9', 'api_interaction', 1, NULL, '2013-07-18 20:29:31');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
