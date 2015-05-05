@@ -214,7 +214,16 @@ class Admin_Controller extends MY_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->authenticate();
+        $segment_array = $this->uri->segment_array();
+        
+        // first and second segments are the controller and method
+        $controller = array_shift( $segment_array );
+        $method = array_shift( $segment_array );
+        $function = array_shift( $segment_array );
+        
+        if ($method.'/'.$controller.'/'.$function != 'shelf/admin/uploads') {
+            $this->authenticate();
+        }
 
         $hook = Hook::singleton();
         $hook->set('SCRUD_INIT');
