@@ -16,7 +16,7 @@
         
         <?php if (isset($dropzone)) { ?>
             <link href="<?php echo base_url(); ?>media/dropzone/min/dropzone.min.css" type="text/css" rel="stylesheet" />
-            <script src="<?php echo base_url(); ?>media/dropzone/min/dropzone.min.js"></script>
+            <script src="<?php echo base_url(); ?>media/dropzone/dropzone.js"></script>
         <?php } ?>
 
         <!-- Le styles 

@@ -9,6 +9,7 @@ $crudAuth = $this->session->userdata('CRUD_AUTH');
 	    	
 	    	<div class="col-lg-5 span-8">
 			  	<a class="btn btn-success" role="button" href="<?php echo base_url(); ?>index.php/admin/shelf/uploads/generated"><b>Show Generated Hpub Files</b></a></li>
+			  	<a class="btn btn-success" role="button" href="<?php echo base_url(); ?>index.php/admin/shelf/uploads/covers"><b>Show Covers</b></a></li>
     		</div>
     	</div>
 
@@ -25,7 +26,7 @@ $crudAuth = $this->session->userdata('CRUD_AUTH');
 
 		<div style="text-align:right;width:100%;">
 			<a class="btn btn" role="button" href="<?php echo base_url(); ?>index.php/admin/shelf/uploads/uploaded"><b>Show Uploaded Files</b></a></li> 
-				<a class="btn btn" role="button" href="<?php echo base_url(); ?>index.php/admin/shelf/uploads/packages"><b>Show Packages Files</b></a></li> 
+			<a class="btn btn" role="button" href="<?php echo base_url(); ?>index.php/admin/shelf/uploads/packages"><b>Show Packages Files</b></a></li> 
 		</div>
 
 	    <script>
@@ -47,7 +48,7 @@ $crudAuth = $this->session->userdata('CRUD_AUTH');
 			}
 
 	      var myDropzone = new Dropzone(document.querySelector("#file-dropzone"), { // Make the whole body a dropzone
-	        acceptedFiles: ".zip",
+	        acceptedFiles: ".zip,.png",
 	        url: location.href+"/upload", // Set the url
 	        thumbnailWidth: 80,
 	        thumbnailHeight: 80,
@@ -58,7 +59,7 @@ $crudAuth = $this->session->userdata('CRUD_AUTH');
 
 	      myDropzone.on("addedfile", function(file) {
 	        // Hookup the start button
-	        console.log(file);
+	        //console.log(file);
 	        //document.querySelector(".start").removeAttribute("disabled");
 	        //document.querySelector(".cancel").removeAttribute("disabled");
 	        //document.querySelector(".start").onclick = function() { myDropzone.enqueueFile(files); };
@@ -78,7 +79,11 @@ $crudAuth = $this->session->userdata('CRUD_AUTH');
 
 	      // Hide the total progress bar when nothing's uploading anymore
 	      myDropzone.on("queuecomplete", function(progress) {
-	      	location.assign(location.href + '/uploads/uploaded/' + this.files[0].name);
+	      	//console.log(this.files[0].type);
+	      	if (this.files && this.files[0].type !== "image/png") {
+	      		location.assign(location.href + '/uploads/uploaded/' + this.files[0].name);
+	      	}
+	      	
 	        //document.querySelector("#total-progress").style.display = "none";
 	      });
 

@@ -295,18 +295,30 @@ class Shelf extends Admin_Controller {
 		if (!is_dir($targetPath)) {
 			mkdir($targetPath);
 		}
-		$targetPath .= '/uploaded';
-		if (!is_dir($targetPath)) {
-			mkdir($targetPath);
-		}
 
 		if (!empty($_FILES)) {
 			$tempFile = $_FILES['file']['tmp_name'];
 			$fileName = $_FILES['file']['name'];
+			$fileType = $_FILES['file']['type'];
 			
+			if ($fileType == 'image/png') {
+
+				$targetPath .= '/covers';
+				if (!is_dir($targetPath)) {
+					mkdir($targetPath);
+				}
+				
+			}  else {
+				$targetPath .= '/uploaded';
+				if (!is_dir($targetPath)) {
+					mkdir($targetPath);
+				}	
+			}
+
 			$targetFile = $targetPath . '/'. $fileName ;
 			move_uploaded_file($tempFile, $targetFile);
 			
+			die(json_encode($_FILES['file']));
 			// if you want to save in db,where here
 			// with out model just for example
 			// $this->load->database(); // load database
