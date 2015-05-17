@@ -47,10 +47,10 @@ class Shelf extends Admin_Controller {
 				    "author": ["Faris"],
 				    "creator": ["MLC"],
 				    "date": "2015-04-01",
-				    "url": "book://interactiveapps.mobi:8888/wp-content/uploads/2014/magazines/issue/",
+				    "url": "book://www.mlc.edu.jo/magazines/bakercloud-ce-console/source/magazines/issue/",
 				    "orientation": "portrait",
 				    "zoomable": false,
-
+				    "-baker-rendering" : "three-cards",
 				    "-baker-background": "#ffffff",
 				    "-baker-vertical-bounce": true,
 				    "-baker-media-autoplay": true,
