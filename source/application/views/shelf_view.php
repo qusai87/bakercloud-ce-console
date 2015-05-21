@@ -48,7 +48,7 @@ $crudAuth = $this->session->userdata('CRUD_AUTH');
 			}
 
 	      var myDropzone = new Dropzone(document.querySelector("#file-dropzone"), { // Make the whole body a dropzone
-	        acceptedFiles: ".zip,.png",
+	        acceptedFiles: ".zip,.png,.hpub",
 	        url: location.href+"/upload", // Set the url
 	        thumbnailWidth: 80,
 	        thumbnailHeight: 80,
@@ -79,9 +79,15 @@ $crudAuth = $this->session->userdata('CRUD_AUTH');
 
 	      // Hide the total progress bar when nothing's uploading anymore
 	      myDropzone.on("queuecomplete", function(progress) {
-	      	//console.log(this.files[0].type);
-	      	if (this.files && this.files[0].type !== "image/png") {
-	      		location.assign(location.href + '/uploads/uploaded/' + this.files[0].name);
+	      	
+	      	if (this.files && this.files.length) {
+	      		console.log(this.files[this.files.length-1]);
+	      		if (this.files[this.files.length-1].type === "application/zip") {
+	      			location.assign(location.href + '/uploads/uploaded/' + this.files[this.files.length-1].name);
+	      		} else if (this.files[this.files.length-1].name.indexOf('.hpub') != -1){
+	      			location.assign(location.href + '/uploads/generated/');
+	      		}
+	      		
 	      	}
 	      	
 	        //document.querySelector("#total-progress").style.display = "none";

@@ -301,6 +301,7 @@ class Shelf extends Admin_Controller {
 			$fileName = $_FILES['file']['name'];
 			$fileType = $_FILES['file']['type'];
 			
+			$info = pathinfo($fileName);
 			if ($fileType == 'image/png') {
 
 				$targetPath .= '/covers';
@@ -308,7 +309,12 @@ class Shelf extends Admin_Controller {
 					mkdir($targetPath);
 				}
 				
-			}  else {
+			}  else if ($fileType == 'application/octet-stream' && $info['extension']  =='hpub') {
+				$targetPath .= '/generated';
+				if (!is_dir($targetPath)) {
+					mkdir($targetPath);
+				}	
+			} else {
 				$targetPath .= '/uploaded';
 				if (!is_dir($targetPath)) {
 					mkdir($targetPath);
@@ -318,6 +324,9 @@ class Shelf extends Admin_Controller {
 			$targetFile = $targetPath . '/'. $fileName ;
 			move_uploaded_file($tempFile, $targetFile);
 			
+			if ($fileType == 'application/octet-stream' && $info['extension']  =='hpub')  {
+				die(json_encode(array('type' => $info['extension'] )));
+			}
 			die(json_encode($_FILES['file']));
 			// if you want to save in db,where here
 			// with out model just for example
