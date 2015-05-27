@@ -17,16 +17,16 @@ class Shelf extends Admin_Controller {
         }
 	}
 
-	public function _push_file($path, $name , $size)
+	public function _push_file($path, $name)
 	{
 		  // make sure it's a file before doing anything!		
 		  if(is_file($path))
 		  {
 		    // required for IE
 		    if(ini_get('zlib.output_compression')) { ini_set('zlib.output_compression', 'Off'); }
-
-
+		    
 		    $mime = get_mime_by_extension($path);
+
 		    // Build the headers to push out the file properly.
 		    header('Pragma: public');     // required
 		    header('Expires: 0');         // no cache
@@ -36,7 +36,8 @@ class Shelf extends Admin_Controller {
 		    header('Content-Type: '.$mime);  // Add the mime type from Code igniter.
 		    header('Content-Disposition: attachment; filename="'.basename($name).'"');  // Add the file name
 		    header('Content-Transfer-Encoding: binary');
-		    header('Content-Length: '. $size); // provide file size
+		    header('Content-Length: '.filesize($path)); // provide file size
+		    header('Connection: close');
 		    readfile($path); // push it out
 		    exit();
 		}
@@ -242,10 +243,7 @@ class Shelf extends Admin_Controller {
 
 		    	//$data = file_get_contents($absolute_path); // Read the file's contents
 				$name = $path_parts['basename'];
-				$info = get_file_info($absolute_path);
-				$size = $info["size"];
-
-		    	$this->_push_file($absolute_path,$name,$size );
+		    	$this->_push_file($absolute_path,$name);
 				//force_download($name, $data);
 	        } else {
         		// open it
