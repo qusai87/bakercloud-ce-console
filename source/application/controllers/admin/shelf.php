@@ -25,11 +25,8 @@ class Shelf extends Admin_Controller {
 		    // required for IE
 		    if(ini_get('zlib.output_compression')) { ini_set('zlib.output_compression', 'Off'); }
 
-		    // get the file mime type using the file extension
-		    $this->load->helper('file');
 
 		    $mime = get_mime_by_extension($path);
-
 		    // Build the headers to push out the file properly.
 		    header('Pragma: public');     // required
 		    header('Expires: 0');         // no cache
@@ -40,7 +37,6 @@ class Shelf extends Admin_Controller {
 		    header('Content-Disposition: attachment; filename="'.basename($name).'"');  // Add the file name
 		    header('Content-Transfer-Encoding: binary');
 		    header('Content-Length: '. $size); // provide file size
-		    header('Connection: close');
 		    readfile($path); // push it out
 		    exit();
 		}
@@ -246,9 +242,9 @@ class Shelf extends Admin_Controller {
 
 		    	//$data = file_get_contents($absolute_path); // Read the file's contents
 				$name = $path_parts['basename'];
-				$size = get_file_info($absolute_path)['size'];
-				//die($name);
-		    	
+				$info = get_file_info($absolute_path);
+				$size = $info["size"];
+
 		    	$this->_push_file($absolute_path,$name,$size );
 				//force_download($name, $data);
 	        } else {
