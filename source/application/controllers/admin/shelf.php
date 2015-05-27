@@ -16,33 +16,6 @@ class Shelf extends Admin_Controller {
         	$this->uploadsDirectory = __DATABASE_CONFIG_PATH__ . '/' . $this->db->database;
         }
 	}
-
-	public function _push_file($path, $name)
-	{
-		  // make sure it's a file before doing anything!		
-		  if(is_file($path))
-		  {
-		    // required for IE
-		    if(ini_get('zlib.output_compression')) { ini_set('zlib.output_compression', 'Off'); }
-		    
-		    $mime = get_mime_by_extension($path);
-
-		    // Build the headers to push out the file properly.
-		    header('Pragma: public');     // required
-		    header('Expires: 0');         // no cache
-		    header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-		    header('Last-Modified: '.gmdate ('D, d M Y H:i:s', filemtime ($path)).' GMT');
-		    header('Cache-Control: private',false);
-		    header('Content-Type: '.$mime);  // Add the mime type from Code igniter.
-		    header('Content-Disposition: attachment; filename="'.basename($name).'"');  // Add the file name
-		    header('Content-Transfer-Encoding: binary');
-		    header('Content-Length: '.filesize($path)); // provide file size
-		    header('Connection: close');
-		    readfile($path); // push it out
-		    exit();
-		}
-	}
-
  
 	public function index() {
 		$this->load->model('crud_auth');
@@ -241,10 +214,11 @@ class Shelf extends Admin_Controller {
 	        } else if ($path_parts['extension'] == 'hpub') {
 	        	$this->load->helper('download');
 
-		    	//$data = file_get_contents($absolute_path); // Read the file's contents
-				$name = $path_parts['basename'];
-		    	$this->_push_file($absolute_path,$name);
-				//force_download($name, $data);
+		    	$data = file_get_contents($absolute_path); // Read the file's contents
+				$name = $path_parts['filename'].'.'.$path_parts['extension'];
+				//die($name);
+		    	
+				force_download($name, $data);
 	        } else {
         		// open it
 	            header ('Cache-Control: no-store, no-cache, must-revalidate');
