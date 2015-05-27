@@ -20,6 +20,9 @@ class Shelf extends Admin_Controller {
 	public function _push_file($path, $name)
 	{
 		  // make sure it's a file before doing anything!
+
+		@apache_setenv('no-gzip', 1);
+		
 		  if(is_file($path))
 		  {
 		    // required for IE
