@@ -187,7 +187,6 @@ class Shelf extends Admin_Controller {
 	    $absolute_path = $this->uploadsDirectory . '/'.$path_in_url;
 	    $absolute_path = rtrim( $absolute_path ,'/' );
 	    // check if it is a path or file
-	    //die($absolute_path );
         if ( is_file($absolute_path) )
         {
         	$path_parts = pathinfo($absolute_path);
@@ -212,6 +211,14 @@ class Shelf extends Admin_Controller {
 		        }
         	} else if(isset($path_parts['extension']) && in_array( $path_parts['extension'], $webpage) ) {
         		@readfile( $absolute_path );
+	        } else if ($path_parts['extension'] == 'hpub') {
+	        	$this->load->helper('download');
+
+		    	$data = file_get_contents($absolute_path); // Read the file's contents
+				$name = $path_parts['filename'].'.'.$path_parts['extension'];
+				//die($name);
+		    	
+				force_download($name, $data);
 	        } else {
         		// open it
 	            header ('Cache-Control: no-store, no-cache, must-revalidate');
