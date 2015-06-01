@@ -22,20 +22,46 @@ $crudAuth = $this->session->userdata('CRUD_AUTH');
         <br/>
         <br/>
 
+        <table class="table table-bordered table-hover list table-condensed">
+        <thead>
+            <tr>
+                <th style="cursor:pointer; text-align:center; color:#333333;text-shadow: 0 1px 0 #FFFFFF;  background-color: #e6e6e6;">Path</th>
+                <th style="cursor:pointer; text-align:center; color:#333333;text-shadow: 0 1px 0 #FFFFFF;  background-color: #e6e6e6; width:50px;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+	        <?php
+	        	$showButtons  = true;
 
-		<?php
+	        	if ($path_in_url == 'uploads/')
+	        		$showButtons = false;
+			    $prefix = $controller.'/'.$method.'/'.$path_in_url;
+			    if (!empty($dirs)) {
+			    	foreach( $dirs as $dir ) {
+			    		echo '<tr>';
+			    		echo '<td>'.anchor($prefix.$dir['name'], $dir['name']).'</td>';
+			    		if ($dir['name'] != '..' && $showButtons ) {
+			    			echo '<td>'.'<button onclick="deleteFile(\''. base_url().'index.php/'.$prefix.$dir['name'].'\')" class="btn btn-mini btn-danger"><b>Delete</b></button>'.'</td>';
+			    		}
+			    		echo '</tr>';
+			    	}
+			    }
+			    if (!empty($files)) {
+			    	foreach( $files as $file ) {
+			    		echo '<tr>';
+			    		echo '<td>'.anchor($prefix.$file['name'], $file['name']).'</td>';
+			    		if ($showButtons )
+			    			echo '<td>'.'<button onclick="deleteFile(\''. base_url().'index.php/'.$prefix.$file['name'].'\')" class="btn btn-mini btn-danger"><b>Delete</b></button>'.'</td>';
+			    		echo '</tr>';
+			    	}
+			    }
+			    	
+			?>
+        </tbody>
+    </table>
 
-			
-		    $prefix = $controller.'/'.$method.'/'.$path_in_url;
-		    if (!empty($dirs)) {
-		    	foreach( $dirs as $dir ) {
-		    		echo '/'.anchor($prefix.$dir['name'], $dir['name']).'<br>';
-		    	}
-		    }
-		    if (!empty($files)) {
-		    	foreach( $files as $file ) {
-		    		echo anchor($prefix.$file['name'], $file['name']).'<br>';
-		    	}
-		    }
-		    	
-		?>
+<script type="text/javascript">
+	function deleteFile(url) {
+		window.location = url +"?delete=1";
+	}
+</script>

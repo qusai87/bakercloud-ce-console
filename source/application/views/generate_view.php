@@ -59,10 +59,9 @@ $crudAuth = $this->session->userdata('CRUD_AUTH');
 		      	crossDomain: true
 		    }).done(function(data) {
 		    	if (data.hpub) {
-		    		alert('Generate JSON Completed!');
 		    		location.assign(location.href.replace('generate/','package/'));
 		    	} else {
-		    		alert('Generate JSON Failed!');
+		    		alert('Prepare Issue Failed!');
 		    	}
 		    }).fail(function() {
 

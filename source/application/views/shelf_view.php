@@ -37,15 +37,6 @@ $crudAuth = $this->session->userdata('CRUD_AUTH');
 	      // previewNode.parentNode.removeChild(previewNode);
 
 			Dropzone.autoDiscover = false;
-			Dropzone.options.dropzone = {
-				accept: function(file, done) {
-					console.log(file);
-					if (file.type != "image/jpeg") {
-						done("Error! Files of this type are not accepted");
-					}
-					else { done(); }
-				}
-			}
 
 	      var myDropzone = new Dropzone(document.querySelector("#file-dropzone"), { // Make the whole body a dropzone
 	        acceptedFiles: ".zip,.png,.hpub",
@@ -54,7 +45,24 @@ $crudAuth = $this->session->userdata('CRUD_AUTH');
 	        thumbnailHeight: 80,
 	        parallelUploads: 20,
 	        queueLimit : 1,
-	        autoQueue: true
+	        autoQueue: true,
+	        success : function(file, response) {
+	        	console.log('UPLOAD RESPONSE : ' ,response);
+	        	var data = response && JSON.parse(response);
+		        if (file && data && data.name) {
+	      			if (data.type === "image/png") {
+		      			location.assign(location.href + '/uploads/covers/');
+		      		}
+		      		else if (data.type === "application/zip") {
+		      			location.assign(location.href + '/uploads/uploaded/' + data.name);
+		      		} else if (data.name.indexOf('.hpub') != -1){
+		      			location.assign(location.href + '/uploads/generated/');
+		      		}
+		      	} else {
+
+		      		alert('Can\'t upload file');
+		      	}
+		    }
 	      });
 
 	      myDropzone.on("addedfile", function(file) {
@@ -79,17 +87,6 @@ $crudAuth = $this->session->userdata('CRUD_AUTH');
 
 	      // Hide the total progress bar when nothing's uploading anymore
 	      myDropzone.on("queuecomplete", function(progress) {
-	      	
-	      	if (this.files && this.files.length) {
-	      		console.log(this.files[this.files.length-1]);
-	      		if (this.files[this.files.length-1].type === "application/zip") {
-	      			location.assign(location.href + '/uploads/uploaded/' + this.files[this.files.length-1].name);
-	      		} else if (this.files[this.files.length-1].name.indexOf('.hpub') != -1){
-	      			location.assign(location.href + '/uploads/generated/');
-	      		}
-	      		
-	      	}
-	      	
 	        //document.querySelector("#total-progress").style.display = "none";
 	      });
 

@@ -132,6 +132,7 @@ class Shelf extends Admin_Controller {
 	    // absolute path using additional segments
 	    $path_in_url = '';
 	    $generated_in_url = '';
+	    $file_name = '';
 	    foreach ( $segment_array as $segment ) {
 	    	if ($path_in_url=='') {
 	    		$path_in_url.= 'uploads/packages/';
@@ -139,12 +140,15 @@ class Shelf extends Admin_Controller {
 	    	} else {
 	    		$path_in_url.= $segment.'/';
 	    		$generated_in_url.= $segment.'/';
+	    		if ($segment!= 'packages' && $segment!= 'generated' && $segment != 'uploaded')
+	    			$file_name .= $segment.'/';
 	    	}
 	    }
 	    $absolute_path = $this->uploadsDirectory . '/'.$path_in_url;
 	    $generated_path = $this->uploadsDirectory . '/'.$generated_in_url;
 	    $absolute_path = rtrim( $absolute_path ,'/' );
 	    $generated_path = rtrim( $generated_path ,'/' );
+	    $file_name = rtrim( $file_name ,'/' );
 
 	    if (!is_dir($this->uploadsDirectory . '/uploads/generated')) {
 			mkdir($this->uploadsDirectory . '/uploads/generated');
@@ -156,7 +160,9 @@ class Shelf extends Admin_Controller {
 	    $this->zip->get_files_from_folder($absolute_path,'/');
 	    $this->zip->archive($generated_path.'.hpub');
 	    $fileName = pathinfo($absolute_path.'.zip',PATHINFO_FILENAME);
-	    $this->db->insert('SHELF',array('FILE' => $fileName , 'URL' =>  base_url() . 'index.php/admin/shelf/uploads/generated/'.$fileName.'.hpub' ));
+
+	    $this->db->delete('SHELF', array('FILE' => $file_name)); 
+	    $this->db->insert('SHELF',array('FILE' => $file_name , 'URL' =>  base_url() . 'index.php/admin/shelf/uploads/generated/'.$fileName.'.hpub' ));
 
 	    //delete_files($absolute_path,true);
 	    //rmdir($absolute_path);
@@ -164,6 +170,11 @@ class Shelf extends Admin_Controller {
 	}
 
 	public function uploads() {
+		$isDelete = $this->input->get('delete');
+		$deleteMode = false;
+		if (isset($isDelete) && !empty($isDelete)) {
+			$deleteMode = true;
+		}
 	    $segment_array = $this->uri->segment_array();
 	 	
 	    // first and second segments are the controller and method
@@ -171,21 +182,21 @@ class Shelf extends Admin_Controller {
 	    $method = array_shift( $segment_array );
 	    // absolute path using additional segments
 	    $path_in_url = '';
-	    $link_path = '';
 	    $file_name = '';
 
 	    foreach ( $segment_array as $segment ) {
 	    	if ($path_in_url=='') {
 	    		$path_in_url.= 'uploads/';
-	    		$link_path.= 'generate/';
 	    	} else {
 	    		$path_in_url .= $segment.'/';
-	    		if ($segment!= 'packages')
+	    		if ($segment!= 'packages' && $segment!= 'generated' && $segment != 'uploaded')
 	    			$file_name .= $segment.'/';
 	    	}
 	    }
+	    
 	    $absolute_path = $this->uploadsDirectory . '/'.$path_in_url;
 	    $absolute_path = rtrim( $absolute_path ,'/' );
+	    $file_name = rtrim( $file_name ,'/' );
 	    // check if it is a path or file
         if ( is_file($absolute_path) )
         {
@@ -193,6 +204,18 @@ class Shelf extends Admin_Controller {
         	$webpage = array(
 	            'php', 'html'
 	        );
+
+        	if ($deleteMode) {
+        		//die($file_name);
+	        	
+	        	if ($path_parts['extension'] == 'hpub') {
+	        		$file_name = preg_replace('/\\.[^.\\s]{3,4}$/', '', $file_name);
+	        		$this->db->delete('SHELF', array('FILE' => $file_name)); 
+	        	}
+	        	
+	        	unlink($absolute_path);
+	        	redirect('admin/shelf/'.dirname($path_in_url));
+	        }
 
         	if ($path_parts['extension'] == 'zip'/* || $path_parts['extension'] == 'hpub'*/) {
         		//die(var_dump($path_parts));
@@ -235,6 +258,11 @@ class Shelf extends Admin_Controller {
         }
         else 
 	    {
+	    	if ($deleteMode) {
+	        	delete_files($absolute_path, true);
+	        	rmdir($absolute_path);
+	        	redirect('admin/shelf/'.dirname($path_in_url));
+	        }
 	        $dirs = array();
 	        $files = array();
 	        // fetching directory
@@ -299,7 +327,7 @@ class Shelf extends Admin_Controller {
 			$tempFile = $_FILES['file']['tmp_name'];
 			$fileName = $_FILES['file']['name'];
 			$fileType = $_FILES['file']['type'];
-			
+			$file_name = preg_replace('/\\.[^.\\s]{3,4}$/', '', $fileName);
 			$info = pathinfo($fileName);
 			if ($fileType == 'image/png') {
 
@@ -309,6 +337,8 @@ class Shelf extends Admin_Controller {
 				}
 				
 			}  else if ($fileType == 'application/octet-stream' && $info['extension']  =='hpub') {
+				$this->db->delete('SHELF', array('FILE' => $file_name)); 
+				$this->db->insert('SHELF',array('FILE' => $file_name , 'URL' =>  base_url() . 'index.php/admin/shelf/uploads/generated/'.$fileName.'.hpub' ));
 				$targetPath .= '/generated';
 				if (!is_dir($targetPath)) {
 					mkdir($targetPath);
@@ -323,9 +353,9 @@ class Shelf extends Admin_Controller {
 			$targetFile = $targetPath . '/'. $fileName ;
 			move_uploaded_file($tempFile, $targetFile);
 			
-			if ($fileType == 'application/octet-stream' && $info['extension']  =='hpub')  {
-				die(json_encode(array('type' => $info['extension'] )));
-			}
+			// if ($fileType == 'application/octet-stream' && $info['extension']  =='hpub')  {
+			// 	die(json_encode(array('type' => $info['extension'] )));
+			// }
 			die(json_encode($_FILES['file']));
 			// if you want to save in db,where here
 			// with out model just for example
