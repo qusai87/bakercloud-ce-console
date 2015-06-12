@@ -92,13 +92,50 @@ class Shelf extends Admin_Controller {
 	    $absolute_path = rtrim( $absolute_path ,'/' );
 
 	    $dirs = [];
-    	$files = get_filenames($absolute_path);
-	    $htmlFiles = [];
-	    foreach ($files as $file) {
-	    	if (strtolower(substr($file, strrpos($file, '.') + 1)) == 'html') {
-	    		$htmlFiles[] = $file;
-	    	}
-	    }
+
+    	$htmlFiles = array();
+		$dir = opendir($absolute_path);
+		while(false != ($file = readdir($dir))) {
+	        if(($file != ".") and ($file != "..")) {
+	        	if (strtolower(substr($file, strrpos($file, '.') + 1)) == 'html') {
+	        		if (strpos($file,'_') === false) {
+	        			$htmlFiles[] = $file; // put in array.
+	        		}
+	        	} else if (is_dir($absolute_path.'/'.$file))   {
+	        		$subdir = opendir($absolute_path.'/'.$file);
+					while(false != ($subfile = readdir($subdir))) {
+				        if(($subfile != ".") and ($subfile != "..")) {
+				        	if (strtolower(substr($subfile, strrpos($subfile, '.') + 1)) == 'html') {
+				        		if (strpos($subfile,'_') === false) {
+				        			$htmlFiles[] = $file.'/'.$subfile; // put in array.
+				        		}
+				        	} else if (is_dir($absolute_path.'/'.$file.'/'.$subfile))  {
+				        		$subdir2 = opendir($absolute_path.'/'.$file.'/'.$subfile);
+								while(false != ($subfile2 = readdir($subdir2))) {
+							        if(($subfile2 != ".") and ($subfile2 != "..")) {
+							        	if (strtolower(substr($subfile2, strrpos($subfile2, '.') + 1)) == 'html') {
+							        		if (strpos($subfile2,'_') === false) {
+							        			$htmlFiles[] = $file.'/'.$subfile.'/'.$subfile2; // put in array.
+							        		}
+							        	}
+							        } 
+								}
+				        	}
+				        } 
+					}
+	        	}
+	        } 
+		}
+
+		natsort($htmlFiles); // sort.
+
+	    // $files = get_filenames($absolute_path);
+		//$htmlFiles = [];
+	    // foreach ($files as $file) {
+	    // 	if (strtolower(substr($file, strrpos($file, '.') + 1)) == 'html') {
+	    // 		$htmlFiles[] = $file;
+	    // 	}
+	    // }
     	//die(var_dump($htmlFiles));
 
  		$this->load->model('crud_auth');
