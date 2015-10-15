@@ -795,6 +795,17 @@ class Crud {
                     if ($hook->isExisted('SCRUD_BEFORE_UPDATE')) {
                         $this->data = $hook->filter('SCRUD_BEFORE_UPDATE', $this->data);
                     }
+
+                    
+
+                    if ($this->conf['table'] == 'ISSUES') {
+                        $rs = $this->dao->findFirst($params);
+                        $VERSION = (int)$rs[$this->conf['table']]['VERSION'];
+
+                        if ($this->data[$this->conf['table']]['URL'] != $rs[$this->conf['table']]['URL'])
+                            $this->data[$this->conf['table']]['VERSION'] = $VERSION+1;
+                    }
+                    //die(print_r($this->data[$this->conf['table']]));
                     $this->dao->update($this->data[$this->conf['table']], $params);
 
                     $tmpData = $this->data[$this->conf['table']];
@@ -802,7 +813,8 @@ class Crud {
                     	$ary = explode('.', $f);
                     	$tmpData[$ary[1]] = $_POST['key'][$ary[0]][$ary[1]];
                     }
-                    
+
+                   
                     $history['history_data'] = json_encode($tmpData);
                     $history['history_action'] = 'update';
                     $historyDao->insert($history);
