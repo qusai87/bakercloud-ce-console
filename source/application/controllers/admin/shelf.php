@@ -231,7 +231,7 @@ class Shelf extends Admin_Controller {
 	    	}
 	    }
 	    
-	    $absolute_path = $this->uploadsDirectory . '/'.$path_in_url;
+	    $absolute_path = urldecode($this->uploadsDirectory . '/'.$path_in_url); 
 	    $absolute_path = rtrim( $absolute_path ,'/' );
 	    $file_name = rtrim( $file_name ,'/' );
 	    // check if it is a path or file
