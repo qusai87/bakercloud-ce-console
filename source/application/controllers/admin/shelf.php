@@ -98,7 +98,7 @@ class Shelf extends Admin_Controller {
 		while(false != ($file = readdir($dir))) {
 	        if(($file != ".") and ($file != "..")) {
 	        	if (strtolower(substr($file, strrpos($file, '.') + 1)) == 'html') {
-	        		if (strpos($file,'_') === 0) {
+	        		if (strpos($file,'_') !== 0) {
 	        			$htmlFiles[] = $file; // put in array.
 	        		}
 	        	} else if (is_dir($absolute_path.'/'.$file))   {
