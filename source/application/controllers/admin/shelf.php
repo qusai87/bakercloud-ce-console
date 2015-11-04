@@ -48,7 +48,7 @@ class Shelf extends Admin_Controller {
 				    "creator": ["MLC"],
 				    "date": "2015-04-01",
 				    "url": "book://www.mlc.edu.jo/magazines/bakercloud-ce-console/source/magazines/issue/",
-				    "orientation": "portrait",
+				    "orientation": "both",
 				    "zoomable": false,
 				    "-baker-rendering" : "three-cards",
 				    "-baker-background": "#ffffff",
