@@ -292,7 +292,6 @@ class Crud {
         $CI->load->model('crud_auth');
         $auth = $CI->crud_auth;
 
-
         if (!empty($this->conf['join'])) {
             foreach ($this->conf['join'] as $tbl => $tmp) {
                 if (file_exists(__DATABASE_CONFIG_PATH__ . '/' . $CI->db->database . '/' . $tbl . '.php')) {
@@ -799,8 +798,10 @@ class Crud {
                     
 
                     if ($this->conf['table'] == 'ISSUES') {
-                        $rs = $this->dao->findFirst($params);
-                        $VERSION = (int)$rs[$this->conf['table']]['VERSION'];
+                        $filterparams = array();
+                        $filterparams['conditions'] = $params;
+                        $results = $this->dao->find($filterparams);
+                        $VERSION = (int)current($results)["ISSUES"]["VERSION"];
 
                         if ($this->data[$this->conf['table']]['URL'] != $rs[$this->conf['table']]['URL'])
                             $this->data[$this->conf['table']]['VERSION'] = $VERSION+1;
